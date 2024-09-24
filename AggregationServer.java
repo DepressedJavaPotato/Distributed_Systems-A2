@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Map;
@@ -37,9 +40,35 @@ private class RequestHandler implements Runnable {
         this.clientSocket=socket;
     }
 
-    
+
+}
+public void run(){
+    try (BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+    PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true)
+    ){
+        String request = in.readLine();
+        if(request.startsWith("GET")) {
+            handleGET(out);
+        }
+        else if (request.startsWith("PUT")){
+            handlePUT(in, out);
+        
+        }
+        else {
+            out.println("HTTP/1.1 400 Bad Request");
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
 }
 
+private void handleGET(PrintWriter out){
+
+}
+
+private void handePUT(BufferedReader in, PrintWriter out){
+    
+}
 //functions
 
 //processRequest(){}
