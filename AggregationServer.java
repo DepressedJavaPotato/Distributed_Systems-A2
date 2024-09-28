@@ -63,11 +63,39 @@ public void run(){
 }
 
 private void handleGET(PrintWriter out){
+    //synchronize lamport clock statement
+
+    String jsonResponse = JSONParser.generateJSON(dataStore);
+    out.println("HTTP/1.1 200 OK");
+    out.println("Content-type: application/json");
+    out.println();
+    out.println(jsonResponse);
 
 }
 
 private void handePUT(BufferedReader in, PrintWriter out){
-    
+    //sync lamport clock statement
+
+    try {
+        StringBuilder reqBody = new StringBuilder();
+        String line;
+        while (!(line = in.readLine()).isEmpty()){
+            reqBody.append(line).append("\n");
+        }
+        //weather data file data
+        WeatherData data = JSONParser.parseJSON(requestBody.toString());
+        if (data != null){
+            dataStore.put(data.getId(), data);
+            out.println("HTTP/1.1 200 OK");
+        }
+        else{
+            out.println("HTTP/1.1 500 Internal Server Error");
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        out.println("HTTP/1.1 500 Internal Server Error");
+    }
 }
 //functions
 
