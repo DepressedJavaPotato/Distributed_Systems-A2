@@ -73,7 +73,7 @@ private void handleGET(PrintWriter out){
 
 }
 
-private void handePUT(BufferedReader in, PrintWriter out){
+private void handlePUT(BufferedReader in, PrintWriter out){
     //sync lamport clock statement
 
     try {
