@@ -75,7 +75,7 @@ private void handleGET(PrintWriter out){
     lamportClock.incrementClock();
 
     try {
-        String jsonResponse = objectMapper.writeValueAsString(database);
+        String jsonResponse = objectMapper.writeValueAsString(database.fetchData());
     out.println("HTTP/1.1 200 OK");
     out.println("Content-type: application/json");
     out.println("Content-Length: " + jsonResponse.length());
