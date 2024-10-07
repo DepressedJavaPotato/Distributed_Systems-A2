@@ -101,7 +101,9 @@ private void handlePUT(BufferedReader in, PrintWriter out){
         while (!(line = in.readLine()).isEmpty()){
             jsonBody.append(line).append("\n");
         }
-        //weather data file data
+       
+        if (jsonBody.length()>0){
+             //weather data file data
         WeatherData data = objectMapper.readValue(jsonBody.toString(), WeatherData.class);
         if (data != null){
             database.storeData(data.getId(), data);
@@ -110,6 +112,10 @@ private void handlePUT(BufferedReader in, PrintWriter out){
         else{
             out.println("HTTP/1.1 500 Internal Server Error");
         }
+    }
+    else{
+        out.println("HTTP/1.1 204 No Content");
+    }
 
     } catch (Exception e) {
         e.printStackTrace();
