@@ -94,7 +94,7 @@ private void handleGET(PrintWriter out){
 
 private void handlePUT(BufferedReader in, PrintWriter out){
     //sync lamport clock statement
-
+    lamportClock.incrementClock();
     try {
         StringBuilder jsonBody = new StringBuilder();
         String line;
