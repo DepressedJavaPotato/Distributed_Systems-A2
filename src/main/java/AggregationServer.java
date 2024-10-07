@@ -14,7 +14,7 @@ public class AggregationServer {
 
 public AggregationServer(int port){
     this.port=port;
-    this.database=new Database();
+    this.database=new Database("src/main/weather.json");
     this.lamportClock=new LamportClock();
 }
 
