@@ -118,15 +118,3 @@ private void handlePUT(BufferedReader in, PrintWriter out){
 }
 }
 }
-//functions
-
-//processRequest(){}
-
-//dataStore()
-
-//removeOldEntries()
-
-//syncLamport()
-
-
-
