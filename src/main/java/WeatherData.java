@@ -1,5 +1,6 @@
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.lang.reflect.Field;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class WeatherData {
     @JsonProperty("id")
@@ -42,6 +43,7 @@ public class WeatherData {
     public WeatherData() {
         this.timestamp = System.currentTimeMillis();
     }
+
 
     public String getId() {
         return id;
@@ -177,5 +179,22 @@ public class WeatherData {
 
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public void setField(String key, String value) {
+        try {
+            Field field = this.getClass().getDeclaredField(key);
+            field.setAccessible(true); //for private fields
+            if (field.getType()==double.class){
+                field.set(this, Double.parseDouble(value));
+            }
+            else if (field.getType()==int.class){
+                field.set(this, Integer.parseInt(value));
+            }
+            else
+            field.set(this, value);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
     }
 }
