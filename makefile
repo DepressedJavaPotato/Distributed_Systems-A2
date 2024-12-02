@@ -11,7 +11,7 @@ DATA_FILE = src\main\weather.txt
 # Compile all Java files
 compile:
 	@echo "Compiling Java source files..."
-	@if not exist $(BIN_DIR) mkdir $(BIN_DIR)
+	@if not exist $(BIN_DIR) then mkdir $(BIN_DIR)
 	$(JAVAC) $(JFLAGS) $(SRC_DIR)\*.java
 
 # Run the Aggregation Server (default port 4567)
